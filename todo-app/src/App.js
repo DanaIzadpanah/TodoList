@@ -31,17 +31,18 @@ function App() {
     if(e.key === 'Enter'){
       createTodoAtIndex(e,i);
     }
-    if (e.key === 'Backspace' && todos[i].content === ''){
+    if (e.key === 'Backspace' && todos[i].content === '') {
       e.preventDefault();
       return removeTodoAtIndex(i);
     }
   }
 
+  // To remove a todo item at a specified index.
   function removeTodoAtIndex(i) {
     if (i === 0 && todos.length === 1) return;
-    setTodos(todos => todos.slice(0, i).concat(todos.slice(i+1, todos.length)));
+    setTodos(todos => todos.slice(0, i).concat(todos.slice(i + 1, todos.length)));
     setTimeout(() => {
-      document.forms[0].elements[i-1].focus();
+      document.forms[0].elements[i - 1].focus();
     }, 0);
   }
 
@@ -65,12 +66,16 @@ function App() {
     }, 0);
   }
 
+  /**
+   * It is called everytime the value in an input field changes.
+   * @param {*} e -> is an event object, not just the value that was changed 
+   * @param {*} i -> is the index 
+   */
   function updateTodoAtIndex(e, i) {
-    const newTodos = [...todos];
-    newTodos[i].content = e.target.value;
+    const newTodos = [...todos]; // This creates a copy as mentioned before of all todos 
+    newTodos[i].content = e.target.value; // you can accesss of the input using e.target.value 
     setTodos(newTodos);
   }
-
 
   return (
     <div className="app">
