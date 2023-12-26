@@ -46,11 +46,7 @@ function App() {
     }, 0);
   }
 
-  /**
-   * 
-   * @param {*} e 
-   * @param {*} i 
-   */
+
   function createTodoAtIndex(e, i) {
     // newTodos is a copy of todos with all of the elements copied. Never change the actual array 
     const newTodos = [...todos];
@@ -77,6 +73,12 @@ function App() {
     setTodos(newTodos);
   }
 
+  function toggleTodoCompleteAtIndex(index) {
+    const tmpTodo = [...todos];
+    tmpTodo[index].isCompleted = !tmpTodo[index].isCompleted;
+    setTodos(tmpTodo);
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -87,8 +89,11 @@ function App() {
 
           {todos.map((todo, i) => (
 
-          <div className='todo'>
-            <div className='checkbox' />
+          <div className= {`todo ${todo.isCompleted && 'todo-is-completed'}`}>
+            <div className={'checkbox'} onClick= {() => toggleTodoCompleteAtIndex(i)} />
+            {todo.isCompleted && (
+              <span>&#x2714;</span>
+            )}
             <input
               type="text"
               value={todo.content}
@@ -96,6 +101,7 @@ function App() {
               // e: The event object, which contains information about the key press.
               // i: The index of the current todo item.
               onKeyDown={e => handleKeyDown(e, i)}
+              onChange={e => updateTodoAtIndex(e,i)}
             />
           </div>
           ))}
