@@ -89,6 +89,7 @@ function App() {
 
           {todos.map((todo, i) => (
 
+          
           <div className= {`todo ${todo.isCompleted && 'todo-is-completed'}`}>
             <div className={'checkbox'} onClick= {() => toggleTodoCompleteAtIndex(i)} />
             {todo.isCompleted && (
